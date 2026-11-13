@@ -120,9 +120,13 @@ for (const site of SITES) {
 for (const site of SITES) {
   const { status, json } = await gh(`/repos/zhubao315/${site.repo}/actions/runs?branch=${site.branch}&per_page=8`);
   if (status !== 200) continue;
-  for (const run of (json.workflow_runs ?? []).filter((x) => x.conclusion === 'failure')) {
-    if (Date.now() - new Date(run.created_at).getTime() < 36 * 3600_000) {
-      incidents.push(`${site.key}: 工作流「${run.name}」失败（${run.event}，${run.html_url}）`);
+  // Judge each workflow by its newest run only: a failure that was already
+  // followed by a green rerun is not an open incident.
+  const newest = {};
+  for (const run of json.workflow_runs ?? []) newest[run.name] ??= run;
+  for (const run of Object.values(newest)) {
+    if (run.conclusion === 'failure' && Date.now() - new Date(run.created_at).getTime() < 36 * 3600_000) {
+      incidents.push(`${site.key}: 工作流「${run.name}」最近一次运行失败（${run.event}，${run.html_url}）`);
     }
   }
 }
