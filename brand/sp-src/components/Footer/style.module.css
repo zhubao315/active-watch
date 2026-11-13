@@ -1,0 +1,90 @@
+.footer {
+  margin-top: 5rem;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, #000 28%, transparent);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: min(var(--active-shell), 100% - 2 * var(--active-gutter));
+  margin: 0 auto;
+  padding: 1.8rem 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mark {
+  flex: none;
+  color: var(--text);
+  transition: transform 0.35s var(--active-ease-out);
+}
+
+.brand:hover .mark,
+.brand:focus-visible .mark {
+  transform: rotate(-3deg) scale(1.04);
+}
+
+.brandText {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1.15;
+}
+
+.wordmark {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+.brandLine {
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--accent);
+}
+
+.linkIcon {
+  opacity: 0.75;
+}
+
+.note {
+  width: 100%;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+@media (min-width: 900px) {
+  .note {
+    width: auto;
+  }
+}

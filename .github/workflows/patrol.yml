@@ -1,0 +1,29 @@
+name: Daily Patrol
+
+# One pass a day over all four ACTIVE sites. Opens a single issue (and keeps
+# it updated) only while something actually needs attention; closes it again
+# when everything recovers. No news is good news.
+on:
+  schedule:
+    # 05:40 UTC ≈ 13:40 Beijing. Late enough that every site's scheduled
+    # sync (with its 5-7 h GitHub scheduler drift) and Pages deploy have
+    # landed; early enough to catch a dead site within the same day.
+    - cron: '40 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  patrol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Patrol the four sites
+        run: node scripts/patrol.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

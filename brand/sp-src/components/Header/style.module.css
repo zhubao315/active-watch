@@ -1,0 +1,217 @@
+/* Unified four-site header: the mother brand on the left, the four sites and
+   the theme switch on the right. The navigation carries the sub-brand icon,
+   a Chinese label and the English site name. The bar is --active-header-h
+   tall on every site — health reads the same token. */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(16px) saturate(1.1);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(var(--active-shell), 100% - 2 * var(--active-gutter));
+  min-height: calc(var(--active-header-h) - 1px);
+  margin: 0 auto;
+  padding: 0.4rem 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+  flex: none;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.mark {
+  flex: none;
+  color: var(--text);
+  /* the main site's hover: the mark tilts and grows a hair, on its easing */
+  transition: transform 0.35s var(--active-ease-out);
+}
+
+.brand:hover .mark,
+.brand:focus-visible .mark {
+  transform: rotate(-3deg) scale(1.04);
+}
+
+.wordmark {
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+.rule {
+  width: 1px;
+  height: 1.1rem;
+  background: var(--border-strong);
+}
+
+.site {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  line-height: 1.15;
+}
+
+.siteZh {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.siteEn {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem;
+  justify-content: flex-end;
+}
+
+.navItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.3rem 0.6rem;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.navItem:hover,
+.navItem:focus-visible {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.navIcon {
+  flex: none;
+  opacity: 0.8;
+}
+
+.navText {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  line-height: 1.15;
+}
+
+.navZh {
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.navEn {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  opacity: 0.72;
+}
+
+.navActive {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.navActive .navEn {
+  opacity: 1;
+}
+
+.navActive .navIcon {
+  opacity: 1;
+}
+
+.navActive:hover,
+.navActive:focus-visible {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.navX {
+  margin-left: 0.35rem;
+  padding: 0.42rem 0.5rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+}
+
+.navX:hover {
+  color: var(--text);
+}
+
+@media (max-width: 1023px) {
+  .inner {
+    gap: 0.5rem;
+  }
+
+  .rule {
+    display: none;
+  }
+
+  .siteEn {
+    display: none;
+  }
+}
+
+/* On a phone the four sites move to the bottom bar; the header keeps only
+   the brand, the current site and the theme switch. */
+@media (max-width: 768px) {
+  .inner {
+    min-height: calc(var(--active-header-h-sm) - 1px);
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .wordmark {
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+  }
+
+  .siteZh {
+    font-size: 0.78rem;
+  }
+}
