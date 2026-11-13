@@ -3,9 +3,12 @@
 # The files in brand/sp-src are shared byte-for-byte: one change, four sites.
 set -euo pipefail
 
-BRAND=/oc/active/brand
+# Works from either location: the workspace brand/ dir or the active-watch
+# checkout (https://github.com/zhubao315/active-watch). The four site repos
+# are expected next to the parent dir of this script; override with ACTIVE_ROOT.
+BRAND=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 REPOS=${REPOS:-"running cycling hiking"}
-ROOT=/oc/active
+ROOT=${ACTIVE_ROOT:-$(dirname "$BRAND")}
 
 for repo in $REPOS; do
   dst="$ROOT/$repo"
@@ -55,3 +58,29 @@ if [ -d "$HEALTH" ]; then
   cp "$BRAND/assets/icons/"*.svg "$HEALTH/brand/icons/"
   echo "synced brand shell -> health"
 fi
+
+# Regenerate each repo's checksum manifest — the Brand Guard workflow fails
+# when a shared asset is hand-edited without going through this script.
+gen_manifest() { # $1 = repo dir, $2 = site key
+  local dst=$1 site=$2
+  ( cd "$dst" && export LC_ALL=C && {
+      if [ "$site" = health ]; then
+        find dashboard/brand -type f ! -name 'hero-*.webp' ! -name "og-${site}.png"
+        find dashboard/fonts -maxdepth 1 -type f -name '*.woff2'
+        printf '%s\n' BRAND_SYSTEM.md dashboard/brand-tokens.css
+      else
+        find public/brand -type f ! -name 'hero-*.webp' ! -name "og-${site}.png"
+        find public/fonts -maxdepth 1 -type f -name '*.woff2'
+        find src/components/BrandNav src/components/Header src/components/Footer \
+             src/components/Layout src/components/SiteHero -maxdepth 1 -type f \
+             \( -name '*.tsx' -o -name '*.css' \)
+        printf '%s\n' BRAND_SYSTEM.md src/styles/brand-tokens.css \
+                      src/components/BrandMark.tsx src/components/SportIcon.tsx
+      fi
+    } | sort -u | xargs sha256sum > BRAND_MANIFEST.sha256 )
+  echo "manifest regenerated -> $site/BRAND_MANIFEST.sha256"
+}
+for repo in $REPOS; do
+  [ -d "$ROOT/$repo" ] && gen_manifest "$ROOT/$repo" "$repo"
+done
+[ -d "$ROOT/health" ] && gen_manifest "$ROOT/health" health
