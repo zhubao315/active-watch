@@ -1,7 +1,8 @@
 {
   "days": {
     "2026-11-13": {
-      "running": 12
+      "running": 12,
+      "cycling": 20
     }
   }
 }
