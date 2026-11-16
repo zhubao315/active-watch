@@ -37,6 +37,8 @@ for repo in $REPOS; do
      "$BRAND/assets/favicon-32.png" "$BRAND/assets/favicon-64.png" \
      "$BRAND/assets/apple-touch-icon.png" "$BRAND/assets/icon-192.png" \
      "$BRAND/assets/icon-512.png" "$dst/public/brand/"
+  cp "$BRAND/assets/zhubao-"*.png "$BRAND/assets/zhubao-slices-manifest.json" \
+     "$BRAND/assets/README-STRICT-SLICES.md" "$dst/public/brand/"
   cp "$BRAND/assets/icons/"*.svg "$dst/public/brand/icons/"
 
   echo "synced brand shell -> $repo"
@@ -55,6 +57,8 @@ if [ -d "$HEALTH" ]; then
      "$BRAND/assets/favicon-32.png" "$BRAND/assets/favicon-64.png" \
      "$BRAND/assets/apple-touch-icon.png" "$BRAND/assets/icon-192.png" \
      "$BRAND/assets/icon-512.png" "$HEALTH/brand/"
+  cp "$BRAND/assets/zhubao-"*.png "$BRAND/assets/zhubao-slices-manifest.json" \
+     "$BRAND/assets/README-STRICT-SLICES.md" "$HEALTH/brand/"
   cp "$BRAND/assets/icons/"*.svg "$HEALTH/brand/icons/"
   echo "synced brand shell -> health"
 fi
