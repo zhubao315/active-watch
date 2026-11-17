@@ -1,9 +1,5 @@
 {
   "days": {
-    "2026-11-13": {
-      "running": 0,
-      "cycling": 20
-    },
     "2026-11-14": {
       "cycling": 2,
       "running": 0
@@ -12,6 +8,9 @@
       "running": 1,
       "cycling": 2,
       "hiking": 0
+    },
+    "2026-11-17": {
+      "running": 10
     }
   }
 }
