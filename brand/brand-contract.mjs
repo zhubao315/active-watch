@@ -46,7 +46,7 @@ export function collectBrandReport() {
     legacyInTitle: title.includes('ZB ACTIVE'),
     legacyInText: bodyText.includes('ZB ACTIVE'),
     navCount: nav.length,
-    navIcons: nav.filter((a) => a.querySelector('svg')).length,
+    navIcons: nav.filter((a) => a.querySelector('svg, img')).length,
     currentCount: qa(
       'header a[aria-current="page"], header a[aria-current="true"]'
     ).length,
@@ -80,8 +80,8 @@ export function checkBrandReport(r, opts = {}) {
   if (!r.logo) failures.push('brand logo (img/svg) missing');
   // v3.0: the master mark is the gradient A. The retired Z raster must not
   // survive in the header after the identity upgrade.
-  if (r.markSrc && !r.markSrc.includes('active-mark.svg')) {
-    failures.push(`brand mark is not the ACTIVE A-mark (${r.markSrc})`);
+  if (r.markSrc && !r.markSrc.includes('active-mark.png')) {
+    failures.push(`brand mark is not the ACTIVE A-mark slice (${r.markSrc})`);
   }
   if (typeof r.markSrc === 'string' && r.markSrc.includes('zhubao-symbol')) {
     failures.push('retired Z-symbol is still the header mark');

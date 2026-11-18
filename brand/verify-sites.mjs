@@ -36,7 +36,7 @@ for (const site of SITES) {
       return {
         mark: !!link && !!link.querySelector('img, svg'),
         wordmark: !!link && (link.textContent || '').includes('ACTIVE'),
-        navIcons: document.querySelectorAll('a[data-site] svg').length,
+        navIcons: document.querySelectorAll('a[data-site] svg, a[data-site] img').length,
       };
     });
     if (overflow > 1) failures.push(`${site.name}@${width} overflow ${overflow}`);

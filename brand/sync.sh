@@ -31,17 +31,22 @@ for repo in $REPOS; do
 
   # brand assets, served as static files
   mkdir -p "$dst/public/brand/icons"
-  cp "$BRAND/assets/active-logo.svg" "$BRAND/assets/active-mark.svg" \
-     "$BRAND/assets/active-logo-light.svg" "$BRAND/assets/active-logo-dark.svg" \
-     "$BRAND/assets/active-mark-mono.svg" "$BRAND/assets/active-logo-stacked.svg" \
-     "$BRAND/assets/active-wordmark.svg" "$BRAND/assets/watch-mark.svg" \
+  # Master mark + sub-brand icons are PNG slices of the identity board.
+  cp "$BRAND/assets/active-mark.png" "$BRAND/assets/active-mark-tile.png" \
+     "$BRAND/assets/watch-mark.png" \
+     "$BRAND/assets/wordmark-dark.png" "$BRAND/assets/wordmark-light.png" \
+     "$BRAND/assets/lockup-dark.png" "$BRAND/assets/lockup-light.png" \
+     "$BRAND/assets/lockup-stacked.png" \
      "$BRAND/assets/favicon.svg" "$BRAND/assets/zhubao-symbol.png" \
      "$BRAND/assets/favicon-32.png" "$BRAND/assets/favicon-64.png" \
      "$BRAND/assets/apple-touch-icon.png" "$BRAND/assets/icon-192.png" \
      "$BRAND/assets/icon-512.png" "$dst/public/brand/"
+  mkdir -p "$dst/public/brand/icons"
+  cp "$BRAND/assets/icon-health.png" "$BRAND/assets/icon-running.png" \
+     "$BRAND/assets/icon-cycling.png" "$BRAND/assets/icon-hiking.png" \
+     "$dst/public/brand/icons/"
   cp "$BRAND/assets/zhubao-"*.png "$BRAND/assets/zhubao-slices-manifest.json" \
      "$BRAND/assets/README-STRICT-SLICES.md" "$dst/public/brand/"
-  cp "$BRAND/assets/icons/"*.svg "$dst/public/brand/icons/"
 
   echo "synced brand shell -> $repo"
 done
@@ -53,17 +58,21 @@ if [ -d "$HEALTH" ]; then
   cp "$BRAND/BRAND_SYSTEM.md" "$ROOT/health/BRAND_SYSTEM.md"
   cp "$BRAND/fonts/"*.woff2 "$HEALTH/fonts/"
   mkdir -p "$HEALTH/brand/icons"
-  cp "$BRAND/assets/active-logo.svg" "$BRAND/assets/active-mark.svg" \
-     "$BRAND/assets/active-logo-light.svg" "$BRAND/assets/active-logo-dark.svg" \
-     "$BRAND/assets/active-mark-mono.svg" "$BRAND/assets/active-logo-stacked.svg" \
-     "$BRAND/assets/active-wordmark.svg" "$BRAND/assets/watch-mark.svg" \
+  cp "$BRAND/assets/active-mark.png" "$BRAND/assets/active-mark-tile.png" \
+     "$BRAND/assets/watch-mark.png" \
+     "$BRAND/assets/wordmark-dark.png" "$BRAND/assets/wordmark-light.png" \
+     "$BRAND/assets/lockup-dark.png" "$BRAND/assets/lockup-light.png" \
+     "$BRAND/assets/lockup-stacked.png" \
      "$BRAND/assets/favicon.svg" "$BRAND/assets/zhubao-symbol.png" \
      "$BRAND/assets/favicon-32.png" "$BRAND/assets/favicon-64.png" \
      "$BRAND/assets/apple-touch-icon.png" "$BRAND/assets/icon-192.png" \
      "$BRAND/assets/icon-512.png" "$HEALTH/brand/"
+  mkdir -p "$HEALTH/brand/icons"
+  cp "$BRAND/assets/icon-health.png" "$BRAND/assets/icon-running.png" \
+     "$BRAND/assets/icon-cycling.png" "$BRAND/assets/icon-hiking.png" \
+     "$HEALTH/brand/icons/"
   cp "$BRAND/assets/zhubao-"*.png "$BRAND/assets/zhubao-slices-manifest.json" \
      "$BRAND/assets/README-STRICT-SLICES.md" "$HEALTH/brand/"
-  cp "$BRAND/assets/icons/"*.svg "$HEALTH/brand/icons/"
   echo "synced brand shell -> health"
 fi
 
