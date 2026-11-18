@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" role="img" aria-label="CYCLING">
+  <title>CYCLING — Dual Wheel Motion</title>
+  <!-- Neo Sport Glyph: equal geometric wheels + a triangular frame with a
+       drive node; the frame leans for direction. No rider, no gears. -->
+  <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="5" cy="16.5" r="3.7"/>
+    <circle cx="19" cy="16.5" r="3.7"/>
+    <!-- frame triangle: rear hub -> seat -> crank -> front hub -->
+    <path d="M5 16.5 9.6 9h4.2l5.2 7.5"/>
+    <path d="M9.6 9 13.8 16.5 5 16.5"/>
+    <path d="M13.8 16.5h5.2"/>
+    <!-- seat + handlebar facets -->
+    <path d="M8.4 8.8h2.6"/>
+    <path d="M13.4 8.2h2.8"/>
+  </g>
+  <!-- central drive node -->
+  <circle cx="13.8" cy="16.5" r="1.5" fill="currentColor" stroke="currentColor" stroke-width="0.8"/>
+</svg>
