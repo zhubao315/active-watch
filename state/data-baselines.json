@@ -4,13 +4,13 @@
   "min_count_ratio": 0.9,
   "sites": {
     "running": {
-      "activity_count": 2039,
+      "activity_count": 2040,
       "max_source_age_days": 3,
       "max_activity_age_days": 14,
       "measured_at": "2026-11-18"
     },
     "cycling": {
-      "activity_count": 7938,
+      "activity_count": 7944,
       "max_source_age_days": 3,
       "max_activity_age_days": 14,
       "measured_at": "2026-11-18"
