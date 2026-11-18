@@ -1,5 +1,13 @@
 # ACTIVE 2.0 升级路线与执行记录
 
+## 品牌 3.0（2026-11-18）
+
+- [x] 以提供的 `ACTIVE Brand Identity & UI System Board.png` 为参考，建立 PRECISION MOTION 渐变 A 形母品牌标志
+- [x] 新增横向/纵向/单色字标、极简字标、ACTIVE WATCH 四节点中枢图形；由共享 `favicon.svg` 生成四站字节一致的 favicon
+- [x] `BRAND_SYSTEM.md` 3.0 + `brand-tokens.css` v3 tokens（保留既有色板与指标语义色）
+- [x] 四站同步新资产并刷新 `BRAND_MANIFEST.sha256`；品牌契约单测断言新标志、拒绝旧 Z 徽记
+- [x] 设计概念展示板 `brand/boards/`（五张：母品牌 / 子品牌图标 / 色彩 / 网站应用 / ACTIVE WATCH）
+
 ## 已完成（2026-11-18 本轮）
 
 按复审建议的推进顺序「ACTIVE-WATCH → RUNNING/CYCLING → HEALTH → HIKING」执行，优先正确性与工程治理。

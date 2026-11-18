@@ -30,6 +30,8 @@ COROS 账号每天限 50 次 FIT 下载，running / cycling / hiking 共享。�
 
 `brand/` 是四站共享品牌资产的唯一编辑处：tokens（`brand-tokens.css`）、规范（`BRAND_SYSTEM.md`）、静态资产（`assets/`）、字体（`fonts/`）、共享组件（`sp-src/`）。
 
+**当前版本：3.0 — PRECISION MOTION。** 母品牌为渐变「A」形徽记（上升腿 `#38BDF8→#2563EB`、下降腿、青色运动弧），字标为 Manrope ExtraBold 800 / 字距 2.2px。一套母品牌 + 四个子品牌（HEALTH 蓝 / RUNNING 青柠 / CYCLING 琥珀 / HIKING 翡翠）+ 一个 ACTIVE WATCH 运营中枢；正式色板与指标语义色保持不变，禁止 `ZB ACTIVE`。设计参考板为 `brand/assets/ACTIVE_Brand_Identity_Board.png`，概念展示板在 `brand/boards/`，正式矢量文件以 `brand/assets/*.svg` 为准。
+
 - `brand/sync.sh` 把共享文件复制到四个仓库并重写每仓的 `BRAND_MANIFEST.sha256`；
 - 每仓的 **Brand Guard** 工作流校验文件与清单一致、且代码中无旧品牌名——有人手改共享资产即红；
 - 跨仓一致性由每日巡检兜底（blob 同源 + 线上字节一致）。
