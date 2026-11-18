@@ -29,15 +29,22 @@ for (const site of SITES) {
     const broken = await page.evaluate(
       () => [...document.images].filter((i) => !i.complete || i.naturalWidth === 0).length
     );
-    const brand = await page.evaluate(() => ({
-      mark: !!document.querySelector('.brand-mark, svg[aria-label="ZB ACTIVE"]'),
-      navIcons: document.querySelectorAll('a[data-site] svg').length,
-    }));
+    // Stable, semantic selectors. The retired name "ZB ACTIVE" is never a
+    // valid brand assertion — the current wordmark is ACTIVE.
+    const brand = await page.evaluate(() => {
+      const link = document.querySelector('header a[aria-label="ACTIVE"], header a.brand');
+      return {
+        mark: !!link && !!link.querySelector('img, svg'),
+        wordmark: !!link && (link.textContent || '').includes('ACTIVE'),
+        navIcons: document.querySelectorAll('a[data-site] svg').length,
+      };
+    });
     if (overflow > 1) failures.push(`${site.name}@${width} overflow ${overflow}`);
     if (broken > 0) failures.push(`${site.name}@${width} broken images ${broken}`);
     if (errors.length) failures.push(`${site.name}@${width} console ${JSON.stringify(errors.slice(0, 2))}`);
     if (!brand.mark) failures.push(`${site.name}@${width} brand mark missing`);
-    console.log(`${site.name} @${width}: overflow ${overflow}, broken ${broken}, mark ${brand.mark}, errors ${errors.length}`);
+    if (!brand.wordmark) failures.push(`${site.name}@${width} ACTIVE wordmark missing`);
+    console.log(`${site.name} @${width}: overflow ${overflow}, broken ${broken}, mark ${brand.mark}, wordmark ${brand.wordmark}, errors ${errors.length}`);
     await page.close();
   }
 

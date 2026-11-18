@@ -14,6 +14,10 @@ on:
 permissions:
   contents: read
   issues: write
+  # Required by the workflow-failure check in scripts/patrol.mjs. Without it
+  # the Actions API returns 403 and the patrol now reports that as an incident
+  # instead of silently skipping it.
+  actions: read
 
 jobs:
   patrol:

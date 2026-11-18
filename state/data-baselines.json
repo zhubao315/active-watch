@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "note": "Data policy for active-watch patrol. Baselines were measured from each repo's src/static/activities.json on 2026-11-18. Update deliberately after a real data-loss review, never automatically. max_source_age_days guards the last successful sync; max_activity_age_days allows for quiet periods (hiking is seasonal and weekly).",
+  "min_count_ratio": 0.9,
+  "sites": {
+    "running": {
+      "activity_count": 2039,
+      "max_source_age_days": 3,
+      "max_activity_age_days": 14,
+      "measured_at": "2026-11-18"
+    },
+    "cycling": {
+      "activity_count": 7938,
+      "max_source_age_days": 3,
+      "max_activity_age_days": 14,
+      "measured_at": "2026-11-18"
+    },
+    "hiking": {
+      "activity_count": 344,
+      "max_source_age_days": 10,
+      "max_activity_age_days": 60,
+      "measured_at": "2026-11-18"
+    }
+  }
+}

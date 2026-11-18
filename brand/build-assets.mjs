@@ -7,12 +7,18 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
-import sharp from 'sharp';
 
-const ART = '/oc/media/brand';
-const BRAND = '/oc/active/brand';
-const OUT = '/oc/active/brand/generated';
+// Portable by default: paths derive from this script's own location, never
+// from a machine-specific absolute path. Override with env vars when the
+// optional source art lives elsewhere (e.g. ACTIVE_ART_DIR=/path/to/art).
+// Rasterisation uses Playwright screenshots; no image library is needed.
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const REPO = path.dirname(HERE);
+const BRAND = path.resolve(process.env.ACTIVE_BRAND_DIR || HERE);
+const ART = path.resolve(process.env.ACTIVE_ART_DIR || path.join(REPO, 'brand', 'art'));
+const OUT = path.resolve(process.env.ACTIVE_ASSET_OUT || path.join(BRAND, 'generated'));
 
 const SITES = [
   { key: 'running', zh: '跑步', en: 'RUNNING', title: 'zhubao315 的跑步生涯', tagline: '用脚步丈量城市，也用数据记住每一次出发。', accent: '#D9F36A', repo: 'running' },
