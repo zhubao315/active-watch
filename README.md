@@ -32,7 +32,7 @@ COROS 账号每天限 50 次 FIT 下载，running / cycling / hiking 共享。�
 
 **当前版本：3.0 — PRECISION MOTION（PNG 切图版）。** 母品牌为渐变「A」形徽记，字标 Manrope ExtraBold 800 / 字距 2.2px。一套母品牌 + 四个子品牌（HEALTH 蓝 / RUNNING 青柠 / CYCLING 琥珀 / HIKING 翡翠）+ 一个 ACTIVE WATCH 运营中枢；正式色板与指标语义色不变，禁止 `ZB ACTIVE`。
 
-**Logo / icon 全部来自 `brand/assets/ACTIVE_Brand_Identity_Board.png` 的实际像素切图，不重新绘制。** 运行 `python3 brand/slice-board.py` 可从品牌板确定性切出 `active-mark.png`、四枚 `icon-*.png`、`watch-mark.png`、字标/组合图及各尺寸 favicon（白/深底转透明，保留原始像素）。`brand/sync.sh` 把这些切片同步到四站。概念展示板在 `brand/boards/`（仅作视觉参考，不作正式文件）。
+**Logo / icon 是真 SVG 矢量**：从 `brand/assets/ACTIVE_Brand_Identity_Board.png` 识别轮廓后用 Bézier 路径 + 原生渐变重建，见 `brand/ACTIVE-BRAND-VECTOR/`（含 `master/`、`sub-brands/`、`watch/`、`favicon/`、`png/`、`validation/` 与 `BRAND_VECTOR_GUIDE.md`）。矢量在黑/白/深蓝/透明下边缘干净、可无限缩放。`brand/sync.sh` 把 `assets/` 中的规范 SVG 同步到四站，站点组件引用 `active-mark.svg` 与 `icons/*.svg`。概念展示板在 `brand/boards/`（仅参考）。
 
 - `brand/sync.sh` 把共享文件复制到四个仓库并重写每仓的 `BRAND_MANIFEST.sha256`；
 - 每仓的 **Brand Guard** 工作流校验文件与清单一致、且代码中无旧品牌名——有人手改共享资产即红；

@@ -2,7 +2,7 @@
 
 ## 品牌 3.0（2026-11-18）
 
-- [x] 以提供的 `ACTIVE Brand Identity & UI System Board.png` 为参考，建立 PRECISION MOTION 渐变 A 形母品牌标志
+- [x] 以提供的 `ACTIVE Brand Identity & UI System Board.png` 为参考，用 Bézier 路径 + 原生渐变重建 PRECISION MOTION A 形母品牌**真矢量**（`ACTIVE-BRAND-VECTOR/`，非位图切片）
 - [x] 新增横向/纵向/单色字标、极简字标、ACTIVE WATCH 四节点中枢图形；由共享 `favicon.svg` 生成四站字节一致的 favicon
 - [x] `BRAND_SYSTEM.md` 3.0 + `brand-tokens.css` v3 tokens（保留既有色板与指标语义色）
 - [x] 四站同步新资产并刷新 `BRAND_MANIFEST.sha256`；品牌契约单测断言新标志、拒绝旧 Z 徽记
