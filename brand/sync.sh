@@ -33,6 +33,8 @@ for repo in $REPOS; do
   mkdir -p "$dst/public/brand/icons"
   cp "$BRAND/assets/active-logo.svg" "$BRAND/assets/active-mark.svg" \
      "$BRAND/assets/active-logo-light.svg" "$BRAND/assets/active-logo-dark.svg" \
+     "$BRAND/assets/active-mark-mono.svg" "$BRAND/assets/active-logo-stacked.svg" \
+     "$BRAND/assets/active-wordmark.svg" "$BRAND/assets/watch-mark.svg" \
      "$BRAND/assets/favicon.svg" "$BRAND/assets/zhubao-symbol.png" \
      "$BRAND/assets/favicon-32.png" "$BRAND/assets/favicon-64.png" \
      "$BRAND/assets/apple-touch-icon.png" "$BRAND/assets/icon-192.png" \
@@ -53,6 +55,8 @@ if [ -d "$HEALTH" ]; then
   mkdir -p "$HEALTH/brand/icons"
   cp "$BRAND/assets/active-logo.svg" "$BRAND/assets/active-mark.svg" \
      "$BRAND/assets/active-logo-light.svg" "$BRAND/assets/active-logo-dark.svg" \
+     "$BRAND/assets/active-mark-mono.svg" "$BRAND/assets/active-logo-stacked.svg" \
+     "$BRAND/assets/active-wordmark.svg" "$BRAND/assets/watch-mark.svg" \
      "$BRAND/assets/favicon.svg" "$BRAND/assets/zhubao-symbol.png" \
      "$BRAND/assets/favicon-32.png" "$BRAND/assets/favicon-64.png" \
      "$BRAND/assets/apple-touch-icon.png" "$BRAND/assets/icon-192.png" \

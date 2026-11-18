@@ -40,6 +40,7 @@ export function collectBrandReport() {
     brandLink: !!brandLink,
     brandText,
     logo: brandLink ? !!brandLink.querySelector('img, svg') : false,
+    markSrc: brandLink?.querySelector('img, svg')?.getAttribute('src') || '',
     // Whether the retired mother-brand name survives anywhere the user can
     // see it. The old name is a defect, never the expected value.
     legacyInTitle: title.includes('ZB ACTIVE'),
@@ -77,6 +78,14 @@ export function checkBrandReport(r, opts = {}) {
 
   if (!r.brandLink) failures.push('header brand link missing');
   if (!r.logo) failures.push('brand logo (img/svg) missing');
+  // v3.0: the master mark is the gradient A. The retired Z raster must not
+  // survive in the header after the identity upgrade.
+  if (r.markSrc && !r.markSrc.includes('active-mark.svg')) {
+    failures.push(`brand mark is not the ACTIVE A-mark (${r.markSrc})`);
+  }
+  if (typeof r.markSrc === 'string' && r.markSrc.includes('zhubao-symbol')) {
+    failures.push('retired Z-symbol is still the header mark');
+  }
   // "ZB ACTIVE" contains "ACTIVE" as a substring — strip the retired name
   // before checking the current one, otherwise the old brand silently passes.
   if (LEGACY_BRANDS.some((name) => r.brandText.includes(name))) {

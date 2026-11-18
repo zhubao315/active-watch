@@ -13,6 +13,7 @@ const healthy = (siteKey) => ({
   brandLink: true,
   brandText: `${CURRENT_BRAND} 跑步 ${siteKey.toUpperCase()}`,
   logo: true,
+  markSrc: '/brand/active-mark.svg',
   legacyInTitle: false,
   legacyInText: false,
   navCount: 8,
@@ -56,6 +57,14 @@ test('stable DOM contract: logo, site name, four nav sites, one current item', (
   assert.ok(failures.some((f) => f.includes('nav missing site health')));
   assert.ok(failures.some((f) => f.includes('nav icons 3')));
   assert.ok(failures.some((f) => f.includes('current nav item count 0')));
+});
+
+test('the v3 mark is the ACTIVE A, not the retired Z symbol', () => {
+  const old = healthy('running');
+  old.markSrc = '/brand/zhubao-symbol.png';
+  const failures = checkBrandReport(old, { siteKey: 'running' });
+  assert.ok(failures.some((f) => f.includes('not the ACTIVE A-mark')));
+  assert.ok(failures.some((f) => f.includes('retired Z-symbol')));
 });
 
 test('runtime health: theme, overflow and broken images', () => {
