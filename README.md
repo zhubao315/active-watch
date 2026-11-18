@@ -30,7 +30,7 @@ COROS 账号每天限 50 次 FIT 下载，running / cycling / hiking 共享。�
 
 `brand/` 是四站共享品牌资产的唯一编辑处：tokens（`brand-tokens.css`）、规范（`BRAND_SYSTEM.md`）、静态资产（`assets/`）、字体（`fonts/`）、共享组件（`sp-src/`）。
 
-**当前版本：3.0 — PRECISION MOTION（PNG 切图版）。** 母品牌为渐变「A」形徽记，字标 Manrope ExtraBold 800 / 字距 2.2px。一套母品牌 + 四个子品牌（HEALTH 蓝 / RUNNING 青柠 / CYCLING 琥珀 / HIKING 翡翠）+ 一个 ACTIVE WATCH 运营中枢；正式色板与指标语义色不变，禁止 `ZB ACTIVE`。
+**当前版本：3.0 — PRECISION MOTION（真 SVG 矢量版）。** 母品牌为渐变「A」形徽记，字标 Manrope ExtraBold 800 / 字距 2.2px。一套母品牌 + 四个子品牌（HEALTH 蓝 / RUNNING 青柠 / CYCLING 琥珀 / HIKING 翡翠）+ 一个 ACTIVE WATCH 运营中枢；正式色板与指标语义色不变，禁止 `ZB ACTIVE`。
 
 **Logo / icon 是真 SVG 矢量**：从 `brand/assets/ACTIVE_Brand_Identity_Board.png` 识别轮廓后用 Bézier 路径 + 原生渐变重建，见 `brand/ACTIVE-BRAND-VECTOR/`（含 `master/`、`sub-brands/`、`watch/`、`favicon/`、`png/`、`validation/` 与 `BRAND_VECTOR_GUIDE.md`）。矢量在黑/白/深蓝/透明下边缘干净、可无限缩放。`brand/sync.sh` 把 `assets/` 中的规范 SVG 同步到四站，站点组件引用 `active-mark.svg` 与 `icons/*.svg`。概念展示板在 `brand/boards/`（仅参考）。导航图标为统一设计的 **ZB ACTIVE Navigation Icon 1.0（Neo Sport Glyph）** 手工 SVG 几何图标，见 `brand/ACTIVE-BRAND-VECTOR/sub-brands/`。
 
@@ -66,7 +66,7 @@ COROS 账号每天限 50 次 FIT 下载，running / cycling / hiking 共享。�
 
 ```bash
 pnpm install --frozen-lockfile
-pnpm test          # 21 项 Node + Python 测试
+pnpm test          # 13 项品牌契约 + 9 项配额账本测试
 pnpm run patrol    # 手动巡检（需 GITHUB_TOKEN）
 pnpm run verify:live   # 线上品牌与运行时验收（需 playwright 浏览器）
 ```
@@ -81,4 +81,9 @@ pnpm run verify:live   # 线上品牌与运行时验收（需 playwright 浏览�
 
 ## 相关文档
 
-复审后的系统级文档在本仓 `docs/`：`ACTIVE_SYSTEM_AUDIT.md`、`ACTIVE_ARCHITECTURE.md`、`ACTIVE_DATA_DICTIONARY.md`、`ACTIVE_PERFORMANCE_BASELINE.md`、`ACTIVE_TEST_COVERAGE.md`、`ACTIVE_PRIVACY_REVIEW.md`、`ACTIVE_UPGRADE_ROADMAP.md`。各站仓库 `docs/` 保留原有的单站审计、路线图、隐私审计与数据公开声明。
+复审后的系统级文档在本仓 `docs/`：`ACTIVE_SYSTEM_AUDIT.md`、`ACTIVE_ARCHITECTURE.md`、`ACTIVE_DATA_DICTIONARY.md`、`ACTIVE_PERFORMANCE_BASELINE.md`、`ACTIVE_TEST_COVERAGE.md`、`ACTIVE_PRIVACY_REVIEW.md`、`ACTIVE_UPGRADE_ROADMAP.md`、`IMPeccable_DESIGN_PASS.md`、`FRONTEND_UI_ENGINEERING_REVIEW.md`。各站仓库 `docs/` 保留原有的单站审计、路线图、隐私审计与数据公开声明。
+
+
+## 版本
+
+**ACTIVE 2.0.0**（tag `v2.0.0`，2026-11-18）—— 详见 [CHANGELOG.md](CHANGELOG.md) / [RELEASE_NOTES.md](RELEASE_NOTES.md) / [Release](https://github.com/zhubao315/active-watch/releases/tag/v2.0.0)。
