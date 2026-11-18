@@ -21,6 +21,14 @@ const SITES = [
 const browser = await chromium.launch();
 const failures = [];
 
+// GitHub Pages occasionally returns a transient 5xx for a subresource. A
+// single such console line is not a brand regression — retry the page once
+// before treating it as a real failure. JS exceptions are never retried away.
+const isTransientResourceError = (msg) =>
+  /Failed to load resource: the server responded with a status of (502|503|504)/.test(
+    msg
+  );
+
 for (const [siteKey, url] of SITES) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const errors = [];
@@ -30,6 +38,13 @@ for (const [siteKey, url] of SITES) {
   page.on('pageerror', (e) => errors.push('PAGEERROR ' + e.message.slice(0, 120)));
   const response = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
   await page.waitForTimeout(1200);
+
+  if (errors.length && errors.every(isTransientResourceError)) {
+    console.log(siteKey, 'transient 5xx resource — retrying once');
+    errors.length = 0;
+    await page.reload({ waitUntil: 'networkidle', timeout: 60000 });
+    await page.waitForTimeout(1200);
+  }
 
   const report = await page.evaluate(collectBrandReport);
   console.log(siteKey, JSON.stringify({ status: response?.status(), ...report }));
