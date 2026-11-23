@@ -1,6 +1,6 @@
 # ACTIVE 性能基线（2026-11-18，构建产物实测）
 
-这是「优化前」基线。所有数字来自本地构建产物与源码文件统计，不是 Lighthouse 实测；LCP/INP/CLS 尚未采集，目标见文末。
+这是「优化前」基线。第 1–5 节数字来自本地构建产物与源码文件统计；第 6 节为 2026-11-23 补充的**浏览器实测**（Playwright + Chromium，线上 Pages），已覆盖 LCP/INP/CLS 与首屏 JS/请求基线，补齐了原先「尚未采集」的缺口。目标值见第 7 节。
 
 ## 1. 源文件与首屏数据
 
@@ -37,7 +37,24 @@
 3. **统计预计算对账**：年度/月度/PB 与现有 `runningStats.ts`、`cyclingStats.ts`、`hikingStats.ts` 逐项核对，禁止另起一套口径。
 4. **缓存与压缩**：JSON/静态资源长缓存，`data-watermark.json` 与 `data_quality.json` 短缓存。
 
-## 5. 目标值（待实测验证）
+## 6. 浏览器实测基线（2026-11-23 补充）
+
+采集方式：三站线上 Pages，Playwright + Chromium；3 档视口（desktop 1440×900 / mobile-390 / mobile-360）× 深浅主题（由 `zhubao315-theme` localStorage 控制）共 6 组；LCP/CLS/INP 由 PerformanceObserver 注入采集，加载后滚动触发交互。采集脚本已落地各站 `scripts/perf_baseline.py`，原始数据见各站 `docs/perf-baseline/<site>.json`，分站汇总见各站 `docs/PERF_BASELINE.md`。
+
+| 站点 | LCP 范围 (ms) | CLS 最大 | INP 最大 (ms) | 首屏 JS (KB, 传输) | JSON (KB) | 3D 场景请求 |
+|---|---:|---:|---:|---:|---:|---:|
+| RUNNING | 1108–1996 | 0.0058 | 21.9 | 615 | 189 | 0 |
+| CYCLING | 1320–2160 | 0.0034 | 20.4 | 953 | 723 | 0 |
+| HIKING | 1052–1812 | 0.0071 | 18.8 | 507 | 36 | 0 |
+
+结论：
+
+- 六个组合全部满足第 7 节目标（LCP ≤ 2.5 s、INP < 200 ms、CLS < 0.1），当前无性能回归风险；
+- 三站首屏 3D 场景请求均为 0，证明「场景按需」已生效（与第 3、4 节一致）；
+- CYCLING 首屏 JS 953 KB / JSON 723 KB 为三站最高，与第 1 节记录的元数据规模吻合——**这是阶段 2「首屏消费迁移」的实测依据**；
+- LCP 在同站不同视口/主题间波动约 500–900 ms，属网络/冷启动噪声，单次测量仅作初值；后续预算对比须同条件多次取中位数。
+
+## 7. 目标值（对照基线）
 
 | 指标 | 目标 |
 |---|---|

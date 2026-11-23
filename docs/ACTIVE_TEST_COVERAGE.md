@@ -31,6 +31,18 @@
 
 注：`format:check` 当前对既有代码会报大量风格差异（31 个文件），因此未作为硬门禁；先保持只读可观测，后续单独做格式收敛，且不得格式化 `brand-tokens.css`（会破坏 Brand Guard 清单）。
 
+## 2b. 三运动站统计单测（2026-11-23 新增）
+
+| 站点 | 文件 | 测试数 | 覆盖 |
+|---|---|---:|---|
+| RUNNING | `tests/stats.test.mjs` | 9 | 类型隔离、run_id 去重、无效行丢弃、加权配速、缺失心率 null、年份升序、闰年 / 周一偏移、scope 过滤、格式化 null |
+| CYCLING | `tests/stats.test.mjs` | 8 | 类型隔离、去重 / 无效、爬升只计上报值、加权配速、缺失心率 null、3 km 视图门槛不在统计层、日历、格式化 |
+| HIKING | `tests/stats.test.mjs` | 9 | 类型隔离 / 去重 / 无效、`climbOf` 合理性校验（海拔上限 2.5× / 距离上限 100 m·km⁻¹）、`aliveRuns`、四季映射、`climbM` 缺失为 null、海拔取最大、日历 |
+
+加载方式：复用 `build-data-shards.mjs` 的 Vite SSR loader（`server.ssrLoadModule`），解析 `@/` 别名与 TS，与页面共用同一统计引擎，不另起口径；测试框架为 Node 内置 `node:test`，未引入新依赖。
+
+接入：三站 `package.json` 新增 `test` 脚本，`ci` 脚本已加入 `pnpm run test`。本地实测 **26/26 通过**。
+
 ## 3. HEALTH
 
 - Python 单测 **90 项**（`python3 -m unittest discover -s tests -q`），本轮新增 8 项统计严谨性测试。
@@ -40,7 +52,7 @@
 
 ## 4. 持续缺口
 
-- 三运动站**没有统计逻辑单元测试**（跑量、配速、速度、时长、爬升、边界值、时区）。建议引入 vitest 或 node:test + TS 类型剥离，优先覆盖 `runningStats.ts` / `cyclingStats.ts` / `hikingStats.ts`。
+- ~~三运动站没有统计逻辑单元测试~~ —— 2026-11-23 已补齐 26 项（见 2b）。剩余：`useActivities` 的 scope 切换、深链接等待等 React 层逻辑仍无单测。
 - 跨运动隔离测试缺失。
 - 深链接测试仅 smoke 覆盖部分场景。
 - 浏览器巡检（JS 异常、404、主题、移动端溢出）目前仅部署路径有，尚未进入 active-watch 每日巡检。
