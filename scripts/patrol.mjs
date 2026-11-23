@@ -24,7 +24,7 @@ import { validateWatermark } from './data-watermark.mjs';
 const API = process.env.GITHUB_API || 'https://api.github.com';
 const PAGES = 'https://zhubao315.github.io';
 const SITES = [
-  { key: 'running', repo: 'running', branch: 'master', maxAgeDays: 3, brandPath: 'src/styles/brand-tokens.css', favicon: '/running/brand/favicon-32.png' },
+  { key: 'running', repo: 'running', branch: 'main', maxAgeDays: 3, brandPath: 'src/styles/brand-tokens.css', favicon: '/running/brand/favicon-32.png' },
   { key: 'cycling', repo: 'cycling', branch: 'main', maxAgeDays: 3, brandPath: 'src/styles/brand-tokens.css', favicon: '/cycling/brand/favicon-32.png' },
   { key: 'hiking', repo: 'hiking', branch: 'main', maxAgeDays: 8, brandPath: 'src/styles/brand-tokens.css', favicon: '/hiking/brand/favicon-32.png' }, // weekly sync by design
   { key: 'health', repo: 'health', branch: 'main', maxAgeDays: 3, brandPath: 'dashboard/brand-tokens.css', favicon: '/health/brand/favicon-32.png' },
